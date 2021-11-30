@@ -16,8 +16,8 @@ def create_instance(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name,U
                 MinCount=1,
                 MaxCount=1,
                 InstanceType=tipo_instancia,
-                #KeyName=key_name,
-                #SecurityGroupIds=[security_group.group_id],
+                KeyName=key_name,
+                SecurityGroupIds=[grupo_segurnaca.group_id],
                 TagSpecifications=[{
                     "ResourceType": "instance",
                     "Tags": [{"Key": "Name", "Value": nome}]
@@ -30,15 +30,15 @@ def create_instance(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name,U
                 MinCount=1,
                 MaxCount=1,
                 InstanceType=tipo_instancia,
-                #KeyName=key_name,
-                #SecurityGroupIds=[security_group.group_id],
+                KeyName=key_name,
+                SecurityGroupIds=[grupo_segurnaca.group_id],
                 TagSpecifications=[{
                     "ResourceType": "instance",
                     "Tags": [{"Key": "Name", "Value": nome}]
                 }]
             )
-        print("Instancia {} criada!".format(nome))
-        return instances
+        print("Instância {} criada!".format(nome))
+        return instances, instances[0].public_ip_address, instances[0].instance_id
     except NameError as e:
         print(e)
         return 

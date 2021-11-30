@@ -7,8 +7,9 @@ from cria_instancia import create_instance
 
 def create_database(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name):
     #ler o arquivo
+    print("Criando Database {0}".format(nome))
     with open('instalar_postgresql.sh', 'r') as file:
         arquivo = file.read()
-    instancia = create_instance(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name,UserData=arquivo)
-    print("Database criado com postgres")
-    return instancia
+    instancia, intancia_ip, intancia_id = create_instance(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name,UserData=arquivo)
+    print("Database {0} criado com postgres".format(nome))
+    return instancia, intancia_ip, intancia_id

@@ -1,0 +1,14 @@
+[
+    {
+        "protocol": "tcp",
+        "CidrIp": "0.0.0.0/0",
+        "FromPort": 22,
+        "ToPort": 22
+    },
+    {
+        "protocol": "tcp",
+        "CidrIp": "0.0.0.0/0",
+        "FromPort": 8080,
+        "ToPort": 8080
+    }
+]
