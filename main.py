@@ -66,16 +66,25 @@ print()
 print("---------------------------------CRIANDO INSTÂNCIA EM OHIO + BANCO DE DADOS---------------------------------")
 
 # CRIANDO BANCO DE DADOS
-postgresql, postgresql_ip, postgresql_id = create_database(POSTGRESQL_REGIAO,POSTGRESQL_IMAGEM,POSTGRESQL_TIPO_INSTANCIA,POSTGRESQL_NOME,POSTGRES_SECURITY_GROUP,KEY_NAME)
+postgresql, postgresql_public_ip_address, postgresql_instance_id = create_database(POSTGRESQL_REGIAO,POSTGRESQL_IMAGEM,POSTGRESQL_TIPO_INSTANCIA,POSTGRESQL_NOME,POSTGRES_SECURITY_GROUP,KEY_NAME)
 
 
 # ------------------------------------------------------ North Virginia -----------------------------------------------------------------
 print("---------------------------------CRIANDO INTÂNCIA EM NORTH VIRGINIA---------------------------------")
 
-# # CRIANDO INSANCIA
-user_data_djago = read_command('install_django.sh').replace("s/node1/postgres_ip/g", f"s/node1/{postgresql_ip}/g", 1)
-        
-django, django_ip, django_id = create_instance(NORTH_VIRGINIA_REGIAO,NORTH_VIRGINIA_IMAGEM,NORTH_VIRGINIA_TIPO_INSTANCIA,NORTH_VIRGINIA_NOME,NORTH_VIRGINIA_SECURITYs_GROUP,KEY_NAME,UserData=user_data)
+# CRIANDO INSTANCIA
+user_data_django = '''#!/bin/bash
+cd /
+sudo apt update
+git clone https://github.com/raulikeda/tasks.git
+cd tasks
+sudo sed -i s/"'HOST': 'node1',"/"'HOST': '{0}',"/g  portfolio/settings.py
+sudo sed -i s/"'PASSWORD': 'cloud',"/"'PASSWORD': '',"/g  portfolio/settings.py
+./install.sh
+sudo ufw allow 8080/tcp
+./run.sh
+'''.format(postgresql_public_ip_address)
+django, django_ip, django_id = create_instance(NORTH_VIRGINIA_REGIAO,NORTH_VIRGINIA_IMAGEM,NORTH_VIRGINIA_TIPO_INSTANCIA,NORTH_VIRGINIA_NOME,NORTH_VIRGINIA_SECURITYs_GROUP,KEY_NAME,UserData=user_data_django)
 
 
   

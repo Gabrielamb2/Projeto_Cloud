@@ -37,8 +37,10 @@ def create_instance(regiao,imagem,tipo_instancia,nome,grupo_segurnaca,key_name,U
                     "Tags": [{"Key": "Name", "Value": nome}]
                 }]
             )
-        print("Instância {} criada!".format(nome))
-        return instances, instances[0].public_ip_address, instances[0].instance_id
+        instances[0].wait_until_running()
+        instances[0].reload()
+        print("Instância {0} criada ip: {1}".format(nome,instances[0].public_ip_address))
+        return instances,instances[0].public_ip_address, instances[0].instance_id
     except NameError as e:
         print(e)
         return 
