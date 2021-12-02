@@ -5,7 +5,7 @@ from cria_database import create_database
 from cria_security_group import create_security_group
 from deleta_instancia import terminate_instance 
 from deleta_security_group import terminate_security_groups
-from read import read_command
+from ami import create_image, delete_image
 import json
 import time
 
@@ -34,12 +34,18 @@ ohio_waiter_terminate = ohio_client.get_waiter('instance_terminated')
 north_virginia_client = boto3.client('ec2', region_name=NORTH_VIRGINIA_REGIAO)
 north_virginia_waiter_terminate = north_virginia_client.get_waiter('instance_terminated')
 
+north_virginia_waiter_ami = north_virginia_client.get_waiter('image_available')
+
 
 
 # DELETANDO INSTÂNCIA
 terminate_instance(ohio_client, ohio_waiter_terminate)
 print()
 terminate_instance(north_virginia_client, north_virginia_waiter_terminate)
+print()
+
+# DELETANDO AMIS
+delete_image(north_virginia_client)
 print()
 
 # DELETANDO SECURITY GROUPS
@@ -86,5 +92,6 @@ sudo ufw allow 8080/tcp
 '''.format(postgresql_public_ip_address)
 django, django_ip, django_id = create_instance(NORTH_VIRGINIA_REGIAO,NORTH_VIRGINIA_IMAGEM,NORTH_VIRGINIA_TIPO_INSTANCIA,NORTH_VIRGINIA_NOME,NORTH_VIRGINIA_SECURITYs_GROUP,KEY_NAME,UserData=user_data_django)
 
-
-  
+# ------------------------------------------------------ AMI -----------------------------------------------------------------
+print("-------------------------------------------------CRIANDO AMI-------------------------------------------------")
+ami_django, ami_django_id = create_image(north_virginia_client,django_id, 'ami_django',north_virginia_waiter_ami)
