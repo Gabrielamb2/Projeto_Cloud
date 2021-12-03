@@ -1,3 +1,16 @@
 # Projeto_Cloud
 
-Plataforma escolhida: Python+Boto3 -> documentação: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+Plataforma escolhida: Python+Boto3 
+
+Validação Instância Ohio com banco de dados postgres:
+![WhatsApp Image 2021-12-02 at 11 28 52](https://user-images.githubusercontent.com/49568374/144611762-2b2b9c4e-b434-44b9-80c3-c73414096641.jpeg)
+![WhatsApp Image 2021-12-02 at 11 28 52](https://user-images.githubusercontent.com/49568374/144611787-8d5390c4-d6e4-4ed3-b334-53239d293557.jpeg)
+
+
+Validação Instância North-Virginia:
+![WhatsApp Image 2021-12-01 at 08 15 54](https://user-images.githubusercontent.com/49568374/144611514-ccb1bce7-c606-4d00-a8a6-3685b31cba7e.jpeg)
+
+
+Validação Criação AMI:
+![WhatsApp Image 2021-12-02 at 11 46 58](https://user-images.githubusercontent.com/49568374/144611567-30a60f87-c4f8-4f4c-91ba-4c7ab75578ac.jpeg)
+
