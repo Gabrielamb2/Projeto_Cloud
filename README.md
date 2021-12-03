@@ -3,7 +3,7 @@
 Plataforma escolhida: Python+Boto3 
 
 Validação Instância Ohio com banco de dados postgres:
-![WhatsApp Image 2021-12-02 at 11 28 52](https://user-images.githubusercontent.com/49568374/144611999-09464049-7baf-4ead-8222-64677a71b08d.jpeg)
+![WhatsApp Image 2021-12-02 at 11 30 52](https://user-images.githubusercontent.com/49568374/144612034-05317925-95a0-410d-982b-6c6589a09fe5.jpeg)
 
 
 Validação Instância North-Virginia:
