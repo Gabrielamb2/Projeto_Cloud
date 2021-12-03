@@ -192,14 +192,13 @@ print()
 
 # ------------------------------------------------------ CRIANDO LOAD BALANCER -----------------------------------------------------------------
 print("-------------------------------------------------CRIANDO LOAD BALANCER-------------------------------------------------")
-load_balancer, amazon_resource_name, dns = cria_load_balancer(
+load_balancer, amazon_resource_name = cria_load_balancer(
     north_virginia_client,
     load_balancer_client,
     'load-balancer-NV-gabi',
     LOAD_BALANCER_SECURITYs_GROUP,
     load_balancer_waiter_available)
 
-print("DNS: {0}".format(dns))
 print()
 
 # ------------------------------------------------------ CRIANDO LAUNCH CONFIG -----------------------------------------------------------------

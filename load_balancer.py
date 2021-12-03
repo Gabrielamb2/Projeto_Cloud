@@ -30,7 +30,7 @@ def cria_load_balancer(ec2, lb_client, load_balancer_name, security_group, waite
         amazon_resource_name = load_balancer['LoadBalancers'][0]['LoadBalancerArn']
         waiter.wait(LoadBalancerArns=[amazon_resource_name])
         print(" Load Balancer {0} criado".format(load_balancer_name))
-        return load_balancer, amazon_resource_name, load_balancer["DNSName"]
+        return load_balancer, amazon_resource_name
     except NameError as e:
         print(e)
 
