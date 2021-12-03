@@ -2,26 +2,19 @@
 #   https://stackoverflow.com/questions/58227287/how-to-use-boto3-to-create-an-ami-from-an-amazon-ebs-snapshot
 #   https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image
 
-def create_image(ec2,id_instancia, nome ,waiter):
+def create_image(ec2, ami_name, instance_id, waiter):
     try:
-        print("Criando AMI {0}".format(nome))
+        print("Criando AMI {0}".format(ami_name))
         response = ec2.create_image(
-            InstanceId=id_instancia,
-            Name=nome,
-            TagSpecifications=[
-                {
-                    'ResourceType': 'image',
-                    'Tags': [
-                        {
-                            'Key': 'Name',
-                            'Value': nome
-                        },
-                    ]
-                },
-            ]
+            Name=ami_name,
+            InstanceId=instance_id,
+            TagSpecifications=[{
+                'ResourceType': 'image',
+                'Tags': [{'Key': 'Name', 'Value': ami_name}]
+            }]
         )
         waiter.wait(ImageIds=[response['ImageId']])
-        print("AMI {0} criada".format(nome))
+        print("AMI {0} criada".format(ami_name))
         return response, response['ImageId']
     except NameError as e:
         print(e)
