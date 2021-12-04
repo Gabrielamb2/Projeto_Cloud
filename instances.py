@@ -1,6 +1,6 @@
 import boto3
 from botocore.config import Config
-from functions.utils.read_command import read_command
+from read_command import read_command
 import time
 
 
@@ -9,8 +9,8 @@ import time
 
 def create_database(instance_name, region, image_id, instance_type, security_group, key_name):
     print("Criando Database {0}".format(instance_name))
-    commands = read_command('commands','install_postgres.sh')
-    postgres, postgres_ip, postgres_id = create_instance_for_aws(instance_name, region, image_id, instance_type, security_group, key_name, user_data=commands)
+    commands = read_command('instalation','install_postgres.sh')
+    postgres, postgres_ip, postgres_id = create_instance(instance_name, region, image_id, instance_type, security_group, key_name, user_data=commands)
     print("Database {0} criado".format(instance_name))
     return postgres, postgres_ip, postgres_id
 
