@@ -1,3 +1,16 @@
+
+def attach_to_load_balancer_for_aws(auto_scalling_name, ec2, target_group_arn):
+    try:
+        print('Attaching load balancer to target group...')
+        ec2.attach_load_balancer_target_groups(
+            AutoScalingGroupName=auto_scalling_name,
+            TargetGroupARNs=[target_group_arn]
+        )
+        print('Load balancer attached!')
+    except NameError as e:
+        print(e)
+
+
 # REFERENCIAS
 #   https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html
 
@@ -24,19 +37,22 @@ def cria_target_group(target_group_name,
     except NameError as e:
         print(e)
 
+
+
+
 # REFERENCIAS
 #   https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.delete_target_group
 
-def deleta_target_group(target_group_name,ec2_lb):
-    try:
-       
-        current_target_groups = ec2_lb.describe_target_groups()["TargetGroups"]
-        if len(current_target_groups) > 0:
-            for target_group in current_target_groups:
-                if target_group["TargetGroupName"] == target_group_name:
-                    ec2_lb.delete_target_group(TargetGroupArn=target_group["TargetGroupArn"])
-            print("Target Group Deletado")
-        else:
-            print("Não tem Target Group para deletar")
-    except NameError as e:
-        print(e)
+def deleta_target_group(target_group_name, ec2_load_balancer):
+  try:
+    print("Deletavdo Target Group")
+    current_target_groups = ec2_load_balancer.describe_target_groups()["TargetGroups"]
+    if len(current_target_groups) > 0:
+      for target_group in current_target_groups:
+        if target_group["TargetGroupName"] == target_group_name:
+          ec2_load_balancer.delete_target_group(TargetGroupArn=target_group["TargetGroupArn"])
+      print("Target Group Deletado")
+    else:
+        print("Não tem Target Group para deletar")
+  except NameError as e:
+    print(e)

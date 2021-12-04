@@ -1,14 +1,17 @@
+import boto3
+from botocore.config import Config
+
+
 # Referências: 
 #     https://boto3.amazonaws.com/v1/documentation/api/latest/guide/ec2-example-security-group.html
 
-def create_security_group(regiao,nome_grupo,descricao,tag_name,ports_and_protocols):
-    
+def cria_security_group(group_name, region, description, tag_name, ports_and_protocols):
     try:
-        region = Config(region_name=regiao)
+        region = Config(region_name=region)
         resource = boto3.resource('ec2', config=region)
-        print('Criando security group: {0}'.format(nome_grupo))
+        print('Criando security group: {0}'.format(group_name))
         security_group = resource.create_security_group(
-            Description = descricao, GroupName = nome_grupo,
+            Description = description, GroupName = group_name,
             TagSpecifications=[{'ResourceType':'security-group',
              'Tags': [{'Key':'Name', 'Value':tag_name}]}]
         )
@@ -21,20 +24,18 @@ def create_security_group(regiao,nome_grupo,descricao,tag_name,ports_and_protoco
                 ToPort=protocol['ToPort'],
                 IpProtocol=protocol['protocol'])
         security_group.load()
-        print("Security group {0} criado".format(nome_grupo))
+        print("Security group {0} criado".format(group_name))
         return security_group
     except NameError as e:
         print(e)
 
-import boto3
-from botocore.config import Config
-from botocore.exceptions import ClientError
+
 
 # Referências: 
 #     https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.delete_security_group
 #     https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html
 
-def terminate_security_groups(ec2):
+def deleta_security_groups(ec2):
     try:
         print('Deletando instâncias em {0}'.format(ec2.meta.region_name))
         current_security_groups = ec2.describe_security_groups()

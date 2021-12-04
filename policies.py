@@ -1,3 +1,4 @@
+
 def cria_policy(policy_name, auto_scalling_group, policy_type, target_value, predefined_metric_type, ec2, target_group_arn, load_balancer_arn):
     try:
         lb_name = load_balancer_arn[load_balancer_arn.find("app"):]
@@ -16,6 +17,5 @@ def cria_policy(policy_name, auto_scalling_group, policy_type, target_value, pre
             }
         )
         print(" Policy {0} criada".format(policy_name))
-       
     except NameError as e:
-        print(e, type='fail')
+        print(e)
