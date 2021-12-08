@@ -2,6 +2,11 @@
 
 Plataforma escolhida: Python+Boto3 
 
+Video de funcionamento:
+https://alinsperedu.sharepoint.com/:v:/s/TrioComp/EXA6LzF_OMlEiF2ZVz9ItlABy0kEdg8gwnxRn4nWAq8P0A?e=Jzkbm8
+OBS: o commit que funciona é o commit 8d340eb8128662016f830e8f1a1d7a15928f1487 (load balancer funcionando)
+
+
 Validação Instância Ohio com banco de dados postgres:
 ![WhatsApp Image 2021-12-02 at 11 30 52](https://user-images.githubusercontent.com/49568374/144612034-05317925-95a0-410d-982b-6c6589a09fe5.jpeg)
 
@@ -20,3 +25,4 @@ Validação Criação Target Group:
 
 Validação Criação Load Balancer:
 ![image](https://user-images.githubusercontent.com/49568374/144612519-4a39be51-d4bb-4510-a208-215620746d7a.png)
+
