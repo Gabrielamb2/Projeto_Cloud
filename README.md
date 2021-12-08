@@ -4,6 +4,7 @@ Plataforma escolhida: Python+Boto3
 
 Video de funcionamento:
 https://alinsperedu.sharepoint.com/:v:/s/TrioComp/EXA6LzF_OMlEiF2ZVz9ItlABy0kEdg8gwnxRn4nWAq8P0A?e=Jzkbm8
+
 OBS: o commit que funciona é o commit 8d340eb8128662016f830e8f1a1d7a15928f1487 (load balancer funcionando)
 
 
